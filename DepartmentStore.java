@@ -84,21 +84,27 @@ public class DepartmentStore {
                 }
 
                 // Display receipt
-                System.out.println("\n\n------------------Department Store------------------");
-                System.out.println("                  Address/Building#                 ");
-                System.out.println("                       Contact#                       ");
+                System.out.println("\n\n----------------------------------------------------");
+                System.out.println("-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*");
+                System.out.println("------------------K.A.N.N. Store--------------------");
+                System.out.println("           Sta. Rita Guiguinto, Bulacan                 ");
+                System.out.println("                    0975488290                      ");
                 System.out.println("\nReceipt for " + customer.name + ":");
+                System.out.println("    Product                                 Price   ");
                 for (Product product : customer.shoppingCart) {
-                    System.out.println(product.name + " - $" + product.price);
+                    System.out.println("    " + product.name + "                                   $" + product.price);
                 }
-                System.out.printf("Total: $%.2f%n", customer.calculateTotal());
+                System.out.printf("\nTotal: $%.2f%n", customer.calculateTotal());
 
                 if (paymentMethod.equals("cash")) {
                     System.out.printf("Cash paid: $%.2f%n", cashPaid);
                 } else {
                     System.out.println("Payment: credit card");
                 }
+                
                 System.out.println("\n----------------------------------------------------");
+                System.out.println("-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*");
+                System.out.println("----------------------------------------------------");
 
                 // Check if the user wants to make another purchase
                 do {
