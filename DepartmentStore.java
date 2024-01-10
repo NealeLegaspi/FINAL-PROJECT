@@ -97,9 +97,34 @@ public class DepartmentStore {
             
         } while (choice != 0 || customer.shoppingCart.isEmpty());
 
+        // Cashier setup
+        List<Cashier> cashiers = new ArrayList<>();
+        cashiers.add(new Cashier(1));
+        cashiers.add(new Cashier(2));
+        cashiers.add(new Cashier(3));    
+
         // Payment
         String paymentMethod = customer.choosePaymentMethod();
         double cashPaid = 0.0;
+
+        // Check if the chosen cashier is available
+        int chosenCashierNumber;
+        do {
+            System.out.print("Enter the cashier number (1, 2, or 3): ");
+            chosenCashierNumber = scanner.nextInt();
+
+            if (chosenCashierNumber < 1 || chosenCashierNumber > 3) {
+                System.out.println("Invalid cashier number. Please enter a valid cashier number.");
+            } else {
+                Cashier chosenCashier = cashiers.get(chosenCashierNumber - 1);
+                if (chosenCashier.isOccupied()) {
+                    System.out.println("Cashier " + chosenCashierNumber + " is occupied. Please choose another cashier.");
+                } else {
+                    chosenCashier.setOccupied(true);
+                    break;
+                }
+            }
+        } while (true);    
 
         if (!customer.shoppingCart.isEmpty()) {
                 if (paymentMethod.equals("cash")) {
@@ -130,7 +155,10 @@ public class DepartmentStore {
                 System.out.println("\n----------------------------------------------------");
                 System.out.println("-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*");
                 System.out.println("----------------------------------------------------");
-                
+
+                // Reset cashier's status to available
+                cashiers.get(chosenCashierNumber - 1).setOccupied(false);
+            
                 // Check if the user wants to make another purchase
                 do {
                     System.out.print("\nDo you want to make another purchase? (Y for Yes, N for No): ");
