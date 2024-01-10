@@ -4,7 +4,32 @@ import java.util.*;
 public class DepartmentStore {
     public static void main(String[] args) {
         Scanner ndl = new Scanner(System.in);
-   
+        Administrator administrator = new Administrator();
+        char choices;
+
+        do {
+            System.out.println("\nLogin as (C)ustomer or (A)dministrator: ");
+            char userType = ndl.next().charAt(0);
+
+            if (userType == 'C' || userType == 'c') {
+                performShopping(ndl);
+            } else if (userType == 'A' || userType == 'a') {
+                performAdminTasks(ndl, administrator);
+            } else {
+                System.out.println("Invalid choice. Please enter 'C' or 'A'.");
+            }
+
+            System.out.print("Do you want to continue? (Y for Yes, N for No): ");
+            choices = ndl.next().charAt(0);
+
+        } while (choices == 'Y' || choices == 'y');
+
+        System.out.println("Exiting the program. Thank you!");
+        ndl.close();
+    }
+
+    private static void performShopping(Scanner scanner) {
+        Scanner ndl = new Scanner(System.in);
         System.out.println("\n******************************************************************");
         System.out.println("*                WELCOME TO THE DEPARTMENT STORE!                *");
         System.out.println("******************************************************************");
@@ -105,7 +130,7 @@ public class DepartmentStore {
                 System.out.println("\n----------------------------------------------------");
                 System.out.println("-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*");
                 System.out.println("----------------------------------------------------");
-
+                
                 // Check if the user wants to make another purchase
                 do {
                     System.out.print("\nDo you want to make another purchase? (Y for Yes, N for No): ");
@@ -127,5 +152,35 @@ public class DepartmentStore {
         } while (choices == 'Y' || choices == 'y');
 
         ndl.close();
+    }
+    private static void performAdminTasks(Scanner scanner, Administrator administrator) {
+        char adminChoice;
+
+        do {
+            System.out.println("\nAdmin Tasks:");
+            System.out.println("1. Display Inventory");
+            System.out.println("2. Add Product");
+            System.out.println("3. Remove Product");
+            System.out.print("Enter your choice: ");
+            int adminOption = scanner.nextInt();
+
+            switch (adminOption) {
+                case 1:
+                    administrator.displayInventory();
+                    break;
+                case 2:
+                    administrator.addProduct();
+                    break;
+                case 3:
+                    administrator.removeProduct();
+                    break;
+                default:
+                    System.out.println("Invalid choice!");
+            }
+
+            System.out.print("Do you want to perform another admin task? (Y for Yes, N for No): ");
+            adminChoice = scanner.next().charAt(0);
+
+        } while (adminChoice == 'Y' || adminChoice == 'y');
     }
 }
