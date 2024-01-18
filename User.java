@@ -1,4 +1,4 @@
-package testcode;
+package departmentstore;
 
 class User {
     String email;
