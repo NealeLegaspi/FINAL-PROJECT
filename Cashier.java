@@ -1,3 +1,5 @@
+package departmentstore;
+
 class Cashier {
     private int number;
     private boolean occupied;
