@@ -1,13 +1,20 @@
-package departmentstore;
-import java.util.*;
-
-class Customer {
+class Customer extends User {
     String name;
     ArrayList<Product> shoppingCart;
+    private List<Product> storeInventory;
 
-    Customer(String name) {
+    Customer(String name, String email, String password) {
+        super(email, password);
         this.name = name;
         this.shoppingCart = new ArrayList<>();
+    }
+    
+    void setStoreInventory(List<Product> storeInventory) {
+        this.storeInventory = storeInventory;
+    }
+    
+    List<Product> getStoreInventory() {
+        return storeInventory;
     }
 
     void addToCart(Product product) {
@@ -28,13 +35,13 @@ class Customer {
             return;
         }
 
-        System.out.println("Your current cart:");
         for (int i = 0; i < shoppingCart.size(); i++) {
             Product product = shoppingCart.get(i);
             System.out.println((i + 1) + ". " + product.name + " - $" + product.price);
         }
 
         Scanner ndl = new Scanner(System.in);
+        System.out.printf("Total amount: $%.2f%n", calculateTotal());
         System.out.print("Enter the number of the item to remove (0 to cancel): ");
         int choice = ndl.nextInt();
 
@@ -76,8 +83,6 @@ class Customer {
             System.out.println("Insufficient funds. Payment canceled.");
             return 0.0;
         } else {
-            double change = cashAmount - total;
-            System.out.printf("Change: $%.2f%n", change);
             return cashAmount;
         }
     }
