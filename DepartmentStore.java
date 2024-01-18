@@ -32,10 +32,10 @@ public class DepartmentStore {
                 System.out.print("\nDo you want to continue? (Y for Yes, N for No): ");
                 choices = ndl.next().charAt(0);
 
-                if (choices == 'N') {
+                if (choices == 'N' || choices == 'n') {
                     System.out.println("Exiting the program....");
                     break;  
-                } else if (choices == 'Y') {
+                } else if (choices == 'Y' || choices == 'y') {
                     System.out.println("Continuing the program....");
                     break;  
                 } else {
