@@ -1,3 +1,5 @@
+package departmentstore;
+
 class Administrator extends User {
     List<Product> storeInventory;
 
