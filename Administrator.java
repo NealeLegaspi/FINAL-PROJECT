@@ -1,8 +1,9 @@
-class Administrator {
+class Administrator extends User {
     List<Product> storeInventory;
 
-    Administrator() {
-        storeInventory = new ArrayList<>();
+    Administrator(String email, String password) {
+        super(email, password);
+        this.storeInventory = new ArrayList<>();
         initializeInventory();
     }
     
@@ -25,7 +26,14 @@ class Administrator {
         storeInventory.add(new Product("Sunglasses", 29.99, 10));
         storeInventory.add(new Product("Towel", 29.99, 17));
         storeInventory.add(new Product("Shoes", 22.99, 6));
-        
+    }
+    
+    List<Product> getStoreInventory() {
+        return storeInventory;
+    }
+
+    void setStoreInventory(List<Product> storeInventory) {
+        this.storeInventory = storeInventory;
     }
     
     void displayInventory() {
@@ -37,13 +45,13 @@ class Administrator {
     }
     
     void addProduct() {
-        Scanner scanner = new Scanner(System.in);
+        Scanner ndl = new Scanner(System.in);
         System.out.print("Enter product name: ");
-        String name = scanner.nextLine();
+        String name = ndl.nextLine();
         System.out.print("Enter product price: $");
-        double price = scanner.nextDouble();
+        double price = ndl.nextDouble();
         System.out.print("Enter initial stock: ");
-        int stock = scanner.nextInt();
+        int stock = ndl.nextInt();
 
         Product newProduct = new Product(name, price, stock);
         storeInventory.add(newProduct);
@@ -51,16 +59,36 @@ class Administrator {
     }
     
     void removeProduct() {
-        Scanner scanner = new Scanner(System.in);
+        Scanner ndl = new Scanner(System.in);
         displayInventory();
         System.out.print("Enter the number of the product to remove: ");
-        int choice = scanner.nextInt();
+        int choice = ndl.nextInt();
 
         if (choice > 0 && choice <= storeInventory.size()) {
             Product removedProduct = storeInventory.remove(choice - 1);
             System.out.println(removedProduct.name + " removed from the inventory.");
         } else {
             System.out.println("Invalid choice. No product removed.");
+        }
+    }
+
+    void editStock(int productIndex, int newStock) {
+        if (productIndex >= 0 && productIndex < storeInventory.size()) {
+            Product product = storeInventory.get(productIndex);
+            product.stock = newStock;
+            System.out.println("Stock updated successfully.");
+        } else {
+            System.out.println("Invalid product index. No stock updated.");
+        }
+    }
+
+    void editPrice(int productIndex, double newPrice) {
+        if (productIndex >= 0 && productIndex < storeInventory.size()) {
+            Product product = storeInventory.get(productIndex);
+            product.price = newPrice;
+            System.out.println("Price updated successfully.");
+        } else {
+            System.out.println("Invalid product index. No price updated.");
         }
     }
 }
