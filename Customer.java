@@ -1,3 +1,5 @@
+package departmentstore;
+
 class Customer extends User {
     String name;
     ArrayList<Product> shoppingCart;
